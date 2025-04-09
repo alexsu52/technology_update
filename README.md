@@ -9,6 +9,7 @@ As AI research is growing and becoming widespread, it is getting harder to find 
 Thanks to Alexander Kozlov, OpenVINO, NNCF and Intel Labs for the support.
 
 ## Contribution required:
+[Q2'25: Technology Update – Low Precision and Model Optimization](https://github.com/alexsu52/technology_update/blob/main/2025/Q2/technology_update.md)
 
 ## Published:
 - [Q1'25: Technology Update – Low Precision and Model Optimization](https://blog.openvino.ai/blog-posts/q125-technology-update---low-precision-and-model-optimization)
