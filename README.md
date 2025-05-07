@@ -19,4 +19,4 @@ Thanks to Alexander Kozlov, OpenVINO, NNCF and Intel Labs for the support.
 - [Q1'24: Technology Update – Low Precision and Model Optimization](https://blog.openvino.ai/blog-posts/q124-technology-update---low-precision-and-model-optimization)
 
 ## Contributors
-Alexander Kozlov,  Nikolay Lyalyushkin,  Nikita Savelyev, Souvikk Kundu, Andrey Anufriev, Pablo Munoz, Alexander Suslov, Liubov Talamanova, Daniil Lyakhov, Yury Gorbachev, Nilesh Jain, Maxim Proshin, Evangelos Georganas
+Alexander Kozlov,  Nikolay Lyalyushkin,  Nikita Savelyev, Souvik Kundu, Andrey Anufriev, Pablo Munoz, Alexander Suslov, Liubov Talamanova, Daniil Lyakhov, Yury Gorbachev, Nilesh Jain, Maxim Proshin, Evangelos Georganas
