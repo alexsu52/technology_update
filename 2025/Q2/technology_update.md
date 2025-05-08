@@ -23,7 +23,7 @@ through neighborhood interactions in the latent state space, (2) OuroMamba-Quant
 based outlier channel selection strategy for activations that gets updated every time-step. Extensive experiments across vision and generative tasks show that our data-free OuroMamba surpasses existing data-driven
 PTQ techniques, achieving state-of-the-art performance across diverse quantization settings. Additionally, the authors demonstrate the efficacy via implementation of efficient GPU kernels to achieve practical latency speedup of up to 2.36×. 
 
-<p align="center"><img width="100%" src="./figure/ouromamba_for_Q2_tech_update.png"></p><br/>
+<p align="center"><img width="100%" src="./figures/ouromamba_for_Q2_tech_update.png"></p><br/>
 - ...
 ## Papers with notable results 
 ### Quantization
