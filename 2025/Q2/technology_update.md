@@ -30,7 +30,16 @@ PTQ techniques, achieving state-of-the-art performance across diverse quantizati
 
 ## Papers with notable results 
 ### Quantization
-- TBD
+- **SeedLM: Compressing LLM Weights into Seeds of Pseudo-Random Generators** ([https://arxiv.org/pdf/2410.10714](https://arxiv.org/pdf/2410.10714)).
+  *Apple and Meta*
+
+This paper introduces SeedLM, a novel data-free post-training compression method for Large Language Models (LLMs) that uses seeds of pseudo-random generators and some coefficients to recreate model weights. 
+SeedLM aims to reduce memory access and leverage idle compute cycles during inference, effectively speeding up memory-bound tasks by trading compute for fewer memory accesses. 
+The method generalizes well across diverse tasks, achieving better zero-shot accuracy retention at 4- and 3-bit compression compared to OmniQuant, AWQ and QuIP#. 
+Additionally, FPGA-based tests demonstrate close to 4x speedup for memory-bound tasks such as generation for 4bit per value over an FP16 Llama baseline.
+
+<p align="center"><img width="50%" src="https://github.com/user-attachments/assets/4f0516a5-8b22-459c-8dfe-2225552aa3f3"></p>
+
 - ...
 ### Pruning / Sparsity
 - TBD
