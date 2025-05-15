@@ -23,7 +23,17 @@ During prefilling, the best sparsification structure (e.g., blocks or verticals 
 During decoding, page-level Quest excels by preserving the KV cache structure, avoiding the performance degradation associated with token pruning during generation.
 Their isoFLOPS analysis shows that for long contexts, larger sparse models outperform smaller dense ones at the same compute cost. They also establish scaling laws predicting accuracy from model size, sequence length, and compression ratio.
 The code is available at: [https://github.com/PiotrNawrot/sparse-frontier](https://github.com/PiotrNawrot/sparse-frontier).
-  
+
+- **XAttention: Block Sparse Attention with Antidiagonal Scoring** ([https://arxiv.org/pdf/2503.16428](https://arxiv.org/pdf/2503.16428)).
+
+The authors introduce XAttention, a training-free block sparse attention method that accelerates the prefill stage of long-context Transformers using a novel antidiagonal scoring strategy. By summing attention values along antidiagonals, XAttention efficiently identifies important blocks while capturing key vertical and slash patterns.
+It achieves up to 13.5× prefill speedup at 256K tokens, maintaining accuracy comparable to full attention across benchmarks in language (RULER, LongBench), video understanding (VideoMME), and video generation (VBench). A dynamic thresholding algorithm further improves accuracy-efficiency trade-offs per attention head. For video generation, a short full-attention warmup ensures layout fidelity.
+The code is available at: [https://github.com/mit-han-lab/x-attention](https://github.com/mit-han-lab/x-attention).
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/388094c8-e87c-479a-9704-c5a7202d33e2">
+</p>
+
 - **OuroMamba: A Data-Free Quantization Framework for Vision Mamba Models** ([https://www.arxiv.org/pdf/2503.10959](https://www.arxiv.org/pdf/2503.10959)).
   *Intel and Georgia Tech*
   
