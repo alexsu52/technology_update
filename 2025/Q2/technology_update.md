@@ -59,6 +59,15 @@ Additionally, FPGA-based tests demonstrate close to 4x speedup for memory-bound 
 
 <p align="center"><img width="50%" src="https://github.com/user-attachments/assets/4f0516a5-8b22-459c-8dfe-2225552aa3f3"></p>
 
+- **APHQ-ViT: Post-Training Quantization with Average Perturbation Hessian Based Reconstruction for Vision Transformers** ([https://arxiv.org/pdf/2504.02508](https://arxiv.org/pdf/2504.02508)).
+  *Beihang University*
+
+APHQ-ViT is a PTQ method designed to address the challenges of quantizing Vision Transformers, particularly under ultra-low bit settings. Traditional reconstruction-based PTQ methods, effective for Convolutional Neural Networks, often fail with ViTs due to inaccurate estimation of output importance and significant accuracy degradation when quantizing post-GELU activations.
+
+To overcome these issues, APHQ-ViT introduces an improved Average Perturbation Hessian (APH) loss for better importance estimation. Additionally, it proposes an MLP Reconstruction technique that replaces the GELU activation function with ReLU in the MLP modules and reconstructs them using the APH loss on a small unlabeled calibration set. Experiments demonstrate that APHQ-ViT, utilizing linear quantizers, outperforms existing PTQ methods by substantial margins in 3-bit and 4-bit quantization across various vision tasks.
+
+The source code for APHQ-ViT is available at https://github.com/GoatWu/APHQ-ViT.
+
 - ...
 ### Pruning / Sparsity
 - TBD
