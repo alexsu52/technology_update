@@ -44,7 +44,18 @@ through neighborhood interactions in the latent state space, (2) OuroMamba-Quant
 based outlier channel selection strategy for activations that gets updated every time-step. Extensive experiments across vision and generative tasks show that our data-free OuroMamba surpasses existing data-driven
 PTQ techniques, achieving state-of-the-art performance across diverse quantization settings. Additionally, the authors demonstrate the efficacy via implementation of efficient GPU kernels to achieve practical latency speedup of up to 2.36×. 
 
-<p align="center"><img width="100%" src="./figures/ouromamba_for_Q2_tech_update.png"></p><br/>
+<p align="center"><img width="100%" height="50%" src="./figures/ouromamba_for_Q2_tech_update.png"></p><br/>
+
+- **Log-Linear Attention** ([https://arxiv.org/pdf/2506.04761](https://arxiv.org/pdf/2506.04761)).
+
+The authors present Log-Linear Attention, a general framework that extends linear attention and state-space models by introducing a logarithmically growing memory structure for efficient long-context modeling. The paper identifies two key limitations in prior linear attention architectures: (1) the use of fixed-size hidden states restricts their ability to model multi-scale temporal dependencies, and (2) their performance degrades on long sequences due to the lack of hierarchical context aggregation.
+To address these challenges, Log-Linear Attention places a particular structure on the attention mask, enabling the compute cost to be log-linear and the memory cost to be logarithmic in sequence length (O(TlogT) training time, 
+O(logT) inference time and memory). Conceptually, it uses a Fenwick tree–based scheme to hierarchically partition the input into power-of-two-sized segments. Each query attends to a logarithmic number of hidden states, summarizing increasingly coarse ranges of past tokens. This design emphasizes recent context with finer granularity, while efficiently compressing distant information.
+The framework is instantiated on top of two representative models: Mamba-2 and Gated DeltaNet, resulting in Log-Linear Mamba-2 and Log-Linear Gated DeltaNet. These variants inherit the expressive recurrence structures of their linear counterparts but benefit from logarithmic memory growth and sub-quadratic training algorithms via a custom chunkwise parallel scan implementation in Triton.
+Experiments across language modeling, long-context retrieval, and in-context reasoning benchmarks show that Log-Linear Attention consistently improves long-range recall while achieving competitive or better throughput than FlashAttention-2 at longer sequence lengths (>8K). The code is available at [https://github.com/HanGuo97/log-linear-attention](https://github.com/HanGuo97/log-linear-attention).
+
+<p align="center"><img width="50%" src="https://github.com/user-attachments/assets/8cb7362e-b69f-4953-9ac6-544710456257"></p><br/>
+
 - ...
 
 ## Papers with notable results 
