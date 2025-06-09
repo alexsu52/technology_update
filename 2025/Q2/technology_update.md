@@ -81,7 +81,16 @@ The source code for APHQ-ViT is available at https://github.com/GoatWu/APHQ-ViT.
 
 - ...
 ### Pruning / Sparsity
-- TBD
+- **SparseVLM: Visual Token Sparsification for Efficient Vision-Language Model Inference** ([https://arxiv.org/pdf/2410.04417](https://arxiv.org/pdf/2410.04417)).
+
+SparseVLM introduces a lightweight, training-free framework for visual token sparsification in vision-language models (VLMs). Unlike text-agnostic approaches, it leverages cross-attention to identify text-relevant visual tokens (“raters”) and adaptively prunes others based on the rank of the attention matrix. Crucially, SparseVLM doesn’t discard all pruned tokens—instead, it recycles the most informative ones (those with high attention relevance scores). These are grouped using a density peak clustering algorithm, and each cluster is compressed into a single representative token. The reconstructed tokens are then reinserted into the model, replacing the larger set of pruned tokens with a compact, information-rich representation. Applied to LLaVA, SparseVLM achieves a 4.5× compression rate with only a 0.9% accuracy drop, reduces CUDA latency by 37%, and saves 67% memory. The code is available at [https://github.com/Gumpest/SparseVLMs](https://github.com/Gumpest/SparseVLMs).
+
+- **Token Sequence Compression for Efficient Multimodal Computing** ([https://arxiv.org/pdf/2504.17892](https://arxiv.org/pdf/2504.17892)).
+  
+The authors introduce a training-free method for compressing visual token sequences in visual language models (VLMs), significantly reducing computational costs. Instead of relying on attention-based “saliency”—a measure of how much attention a model gives to each token—they use simple clustering to group similar visual tokens and aggregate them. Their “Cluster & Aggregate” approach outperforms prior finetuning-free methods like VisionZip and SparseVLM across 8+ benchmarks, even when retaining as little as 11% of the original tokens. Surprisingly, random and spatial sampling also perform competitively, revealing high redundancy in visual encodings.
+
+<p align="center"><img width="50%" src="https://github.com/user-attachments/assets/b5b99700-ff0c-4f8f-b28a-ca079341feae"></p>
+
 - ...
 ### Other 
 - **MoDM: Efficient Serving for Image Generation via Mixture-of-Diffusion Models** ([https://arxiv.org/pdf/2503.11972](https://arxiv.org/pdf/2503.11972)).
