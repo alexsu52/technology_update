@@ -91,6 +91,28 @@ The authors introduce a training-free method for compressing visual token sequen
 
 <p align="center"><img width="50%" src="https://github.com/user-attachments/assets/b5b99700-ff0c-4f8f-b28a-ca079341feae"></p>
 
+- **TopV: Compatible Token Pruning with Inference Time Optimization for Fast and Low-Memory Multimodal Vision Language Model** ([https://arxiv.org/pdf/2503.18278v2](https://arxiv.org/pdf/2503.18278v2)).
+
+The authors introduce a training-free, optimization-based framework for reducing visual token redundancy in VLMs. Visual tokens often dominate the input sequence—up to 95% in some models. TopV addresses this by pruning unimportant visual tokens once during the prefilling stage, before decoding begins.
+Instead of relying on attention scores, TopV estimates the importance of each visual token by solving an optimal transport problem. In this setup:
+
+• Source tokens are the input visual tokens entering a specific transformer layer.
+
+• Target tokens are the output visual tokens after that layer has processed the input—specifically, the output after the Post-LN sublayer.
+
+<p align="center"><img src="https://github.com/user-attachments/assets/52352aef-be92-4060-996f-79d21c86ccbb"></p>
+
+TopV calculates how much each input token contributes to the output using the Sinkhorn algorithm, guided by a cost function that considers:
+
+• How similar the tokens are in content (feature similarity),
+
+• How close they are in the image (spatial proximity),
+
+• How central they are in the image (centrality).
+
+To prevent visual collapse—especially in detail-sensitive tasks like OCR and captioning—TopV includes a lightweight recovery step. From the discarded tokens, TopV uniformly samples a subset at regular intervals (e.g., every 4th or 6th token) and reinserts them into the token sequence alongside the top-k tokens, ensuring spatial diversity and semantic coverage without significant overhead. 
+TopV performs pruning once after the prompt and image are processed. The pruned visual token set remains fixed throughout decoding, enabling efficient and consistent inference.
+
 - ...
 ### Other 
 - **MoDM: Efficient Serving for Image Generation via Mixture-of-Diffusion Models** ([https://arxiv.org/pdf/2503.11972](https://arxiv.org/pdf/2503.11972)).
