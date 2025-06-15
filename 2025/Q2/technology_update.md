@@ -159,6 +159,12 @@ This design enables adaptive serving by dynamically balancing latency and image 
 models for cache-miss requests to maintain quality. Small model image quality is preserved using retrieved cached images. MoDM has a global monitor that optimally allocates
 GPU resources and balances inference workload, ensuring high throughput while meeting Service-Level Objectives (SLOs) under varying request rates. Extensive evaluations show
 that MoDM significantly reduces an average serving time by 2.5× while retaining image quality, making it a practical solution for scalable and resource-efficient model deployment.
+
+- **Fast-dLLM: Training-free Acceleration of Diffusion LLM by Enabling KV Cache and Parallel Decoding** ([https://arxiv.org/abs/2505.22618](https://arxiv.org/abs/2505.22618)).
+  *The University of Hong Kong, NVIDIA, MIT, Independent Researcher*
+
+Fast-dLLM is a training-free method to accelerate diffusion-based large language models by introducing a block-wise KV Cache and confidence-aware parallel decoding. The block-wise KV Cache reuses more than 90% of attention activations with bidirectional (prefix and suffix) caching, delivering throughput improvements ranging from 8.1x to 27.6x while keeping accuracy loss under 2%. Confidence-aware parallel decoding selectively generates tokens that exceed a set confidence threshold (like 0.9), achieving up to 13.3x speedup and preserving output coherence thanks to theoretical guarantees. Experimentally, Fast-dLLM achieves up to 27.6× end-to-end speedup on 1024-token sequences (e.g., LLaDA, 8-shot) and keeps accuracy within 2% of the baseline across major reasoning and code benchmarks including GSM8K, MATH, HumanEval, and MBPP.
+  
 - ...
 ### Software
 - **FlashRNN: I/O-Aware Optimization of Traditional RNNs on modern hardware** ([https://arxiv.org/abs/2412.07752](https://arxiv.org/abs/2412.07752)).
