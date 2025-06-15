@@ -156,5 +156,8 @@ GPU resources and balances inference workload, ensuring high throughput while me
 that MoDM significantly reduces an average serving time by 2.5× while retaining image quality, making it a practical solution for scalable and resource-efficient model deployment.
 - ...
 ### Software
-- TBD
+- **FlashRNN: I/O-Aware Optimization of Traditional RNNs on modern hardware** ([https://arxiv.org/abs/2412.07752](https://arxiv.org/abs/2412.07752)).
+  *Johannes Kepler University, NXAI Lab and NXAI GmbH*
+
+FlashRNN extends traditional RNNs - such as LSTMs and GRUs - by introducing a parallelization scheme where the hidden state is divided into multiple smaller blocks, allowing for parallel computation similar to the head-wise processing in Transformers. The authors develop and open-source custom fused CUDA and Triton kernels that leverage the GPU memory hierarchy efficiently for both forward and backward passes, together with an automatic hardware-aware optimization framework. This approach achieves up to 50x speedup over vanilla PyTorch implementations, making RNNs competitive with Transformer-like models on modern GPUs. The code is available at: https://github.com/NX-AI/flashrnn.
 - ...
