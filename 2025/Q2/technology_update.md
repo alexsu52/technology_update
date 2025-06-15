@@ -70,6 +70,11 @@ Additionally, FPGA-based tests demonstrate close to 4x speedup for memory-bound 
 
 <p align="center"><img width="50%" src="https://github.com/user-attachments/assets/4f0516a5-8b22-459c-8dfe-2225552aa3f3"></p>
 
+- **MambaQuant: Quantizing the Mamba Family with Variance Aligned Rotation Methods** ([https://arxiv.org/abs/2501.13484](https://arxiv.org/abs/2501.13484)).
+*Houmo AI, Harbin Institute of Technology (Shenzhen), Nanjing University, Southeast University*.
+
+This paper tackles the challenge of post-training quantization for Mamba architectures. Standard quantization techniques adapted from large language models result in substantial accuracy loss when applied to Mamba models, largely due to extreme outliers and inconsistent variances across different channels in weights and activations. To address these issues, the authors propose MambaQuant, introducing two variance alignment techniques: KLT-Enhanced and Smooth-Fused rotations. These methods effectively equalize channel variances, resulting in more uniform data distributions before quantization. Experimental results show that MambaQuant enables Mamba models to be quantized to 8 bits for both weights and activations with less than 1% loss in accuracy, markedly surpassing previous approaches on both vision and language tasks. 
+
 - **APHQ-ViT: Post-Training Quantization with Average Perturbation Hessian Based Reconstruction for Vision Transformers** ([https://arxiv.org/pdf/2504.02508](https://arxiv.org/pdf/2504.02508)).
   *Beihang University*
 
