@@ -92,7 +92,7 @@ To overcome these issues, APHQ-ViT introduces an improved Average Perturbation H
 
 The source code for APHQ-ViT is available at https://github.com/GoatWu/APHQ-ViT.
 
-**LoTA-QAF: Lossless Ternary Adaptation for Quantization-Aware Fine-Tuning** ([https://arxiv.org/pdf/2505.18724](https://arxiv.org/pdf/2505.18724)).
+- **LoTA-QAF: Lossless Ternary Adaptation for Quantization-Aware Fine-Tuning** ([https://arxiv.org/pdf/2505.18724](https://arxiv.org/pdf/2505.18724)).
  *Southwestern University of Finance and Economics, Financial Intelligence and Financial Engineering Key Laboratory of Sichuan Province,  The Hong Kong University of Science and Technology (Guangzhou), Sun Yat-sen University, Huawei Inc.*
 
 LoTA-QAF is a quantization-aware fine-tuning method for LLMs designed for efficient edge deployment. Its key innovation is a ternary adaptation approach, where ternary adapter matrices can only increment, decrement, or leave unchanged each quantized integer weight (+1, −1, or 0) within the quantization grid during fine-tuning. This tightly restricts the amount each quantized value can change, ensuring the adapters do not make large modifications to weights. The method enables lossless merging of adaptation into the quantized model, preserving computational efficiency and model performance with no quantization-induced accuracy loss at merge. The method uses a novel ternary signed gradient descent (t-SignSGD) optimizer to efficiently update these highly constrained ternary weights. Evaluated on the Llama-3.1/3.3 and Qwen-2.5 families, LoTA-QAF consistently outperforms previous quantization-aware fine-tuning methods such as QA-LoRA, especially at very low bit-widths (2-bit and 3-bit quantization), recovering up to 5.14% more accuracy on MMLU compared to LoRA under 2-bit quantization, while also being 1.7x–2x faster at inference after merging. Task-specific fine-tuning shows LoTA-QAF improves on other quantization-aware methods, though it slightly lags behind full-precision LoRA in those scenarios.
@@ -100,6 +100,11 @@ The code is available at: https://github.com/KingdalfGoodman/LoTA-QAF.
 
 <p align="center"><img width="70%" src=https://github.com/user-attachments/assets/3f0d61d1-b664-4e0e-a585-6952912411c2></p>
 
+- **DL-QAT: Weight-Decomposed Low-Rank Quantization-Aware Training for Large Language Models** ([https://arxiv.org/abs/2504.09223](https://arxiv.org/abs/2504.09223)).
+  *AMD*
+
+DL-QAT is a quantization-aware training (QAT) technique for LLMs that achieves high efficiency by updating less than 1% of parameters. It introduces group-specific quantization magnitudes and uses LoRA-based low-rank adaptation within the quantization space. Tested on LLaMA and LLaMA2, DL-QAT outperforms previous state-of-the-art methods—including QA-LoRA and LLM-QAT - by up to 4.2% on MMLU benchmarks for 3-bit models, while greatly reducing memory and training costs.
+  
 - ...
 ### Pruning / Sparsity
 - **SparseVLM: Visual Token Sparsification for Efficient Vision-Language Model Inference** ([https://arxiv.org/pdf/2410.04417](https://arxiv.org/pdf/2410.04417)).
