@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/1dc97085-54d1-4d62-8423-93847b570e23)# Q2'25: Technology Update – Low Precision and Model Optimization
+Q2'25: Technology Update – Low Precision and Model Optimization
 ## Summary 
 TBD
 ## Highlights
@@ -125,6 +125,14 @@ TopV calculates how much each input token contributes to the output using the Si
 
 To prevent visual collapse—especially in detail-sensitive tasks like OCR and captioning—TopV includes a lightweight recovery step. From the discarded tokens, TopV uniformly samples a subset at regular intervals (e.g., every 4th or 6th token) and reinserts them into the token sequence alongside the top-k tokens, ensuring spatial diversity and semantic coverage without significant overhead. 
 TopV performs pruning once after the prompt and image are processed. The pruned visual token set remains fixed throughout decoding, enabling efficient and consistent inference.
+
+- **Beyond 2:4: exploring V:N:M sparsity for efficient transformer inference on GPUs**
+([https://arxiv.org/abs/2410.16135](https://arxiv.org/abs/2410.16135)).
+ *Tsinghua University, Beijing Jiaotong University*
+
+This paper introduces and systematically studies V:N:M sparsity as a more efficient and flexible alternative to the industry-standard 2:4 sparsity for accelerating Transformer inference on GPUs. In the V:N:M approach, weight matrices are divided into V×M blocks; within each block, most columns are pruned, and 2:4 sparsity is then applied to the remaining columns. This scheme enables significantly higher and more adaptable sparsity ratios, while remaining compatible with existing GPU sparse tensor core acceleration. The authors propose a comprehensive framework for creating V:N:M-sparse Transformers: it features a heuristic method for selecting V and M values to optimize the accuracy-speedup trade-off, a V:N:M-specific channel permutation method for improving accuracy in low-budget training scenarios, and a three-stage LoRA training process for memory-efficient fine-tuning. Experimental results show that V:N:M-sparse Transformers can achieve much higher sparsity levels - such as 75% parameter reduction, while maintaining nearly lossless accuracy on downstream tasks, and outperform 2:4 sparsity in both speed and flexibility.
+
+<p align="center"><img width="50%" src="https://github.com/user-attachments/assets/63bcfc3b-440f-4395-9d11-9581fedd25b7"></p>
 
 - ...
 ### Other 
