@@ -1,4 +1,4 @@
-# Q2'25: Technology Update – Low Precision and Model Optimization
+![image](https://github.com/user-attachments/assets/1dc97085-54d1-4d62-8423-93847b570e23)# Q2'25: Technology Update – Low Precision and Model Optimization
 ## Summary 
 TBD
 ## Highlights
@@ -71,9 +71,17 @@ Additionally, FPGA-based tests demonstrate close to 4x speedup for memory-bound 
 <p align="center"><img width="50%" src="https://github.com/user-attachments/assets/4f0516a5-8b22-459c-8dfe-2225552aa3f3"></p>
 
 - **MambaQuant: Quantizing the Mamba Family with Variance Aligned Rotation Methods** ([https://arxiv.org/abs/2501.13484](https://arxiv.org/abs/2501.13484)).
-*Houmo AI, Harbin Institute of Technology (Shenzhen), Nanjing University, Southeast University*.
+ *Houmo AI, Harbin Institute of Technology (Shenzhen), Nanjing University, Southeast University*
 
 This paper tackles the challenge of post-training quantization for Mamba architectures. Standard quantization techniques adapted from large language models result in substantial accuracy loss when applied to Mamba models, largely due to extreme outliers and inconsistent variances across different channels in weights and activations. To address these issues, the authors propose MambaQuant, introducing two variance alignment techniques: KLT-Enhanced and Smooth-Fused rotations. These methods effectively equalize channel variances, resulting in more uniform data distributions before quantization. Experimental results show that MambaQuant enables Mamba models to be quantized to 8 bits for both weights and activations with less than 1% loss in accuracy, markedly surpassing previous approaches on both vision and language tasks. 
+
+- **SageAttention3: Microscaling FP4 Attention for Inference and An Exploration of 8-bit Training** ([https://arxiv.org/abs/2505.11594](https://arxiv.org/abs/2505.11594)).
+ *Tsinghua University*
+
+The authors introduce SageAttention3, a novel FP4 micro-scaling quantization technique for Transformer attention designed to achieve a 5x speedup in inference on NVIDIA GPUs and an 8-bit novel training approach that preserves model accuracy during finetuning while reducing memory demands. The method applies FP4 quantization to the two main attention matrix multiplications, using a microscaling strategy with a group size of 16 elements per scale factor. This fine granularity limits the impact of outlier values that can otherwise cause significant quantization error. To address issues with quantizing the attention map, the authors propose a two-level quantization scheme. First, each row of attention map is scaled into the range 
+[0, 448 × 6], which ensures the FP8 scaling factor (required by hardware) fully utilizes its representation range. Then, FP4 quantization is applied at the block level. This two-step process significantly reduces quantization error compared to direct quantization. Empirical results show that SageAttention3 delivers substantial inference speedups with minimal quality loss on language, image, and video generation benchmarks. 
+
+<p align="center"><img width="70%" src=https://github.com/user-attachments/assets/8d08d5e2-d1ff-4dd0-9142-ebea707bf4b8></p>
 
 - **APHQ-ViT: Post-Training Quantization with Average Perturbation Hessian Based Reconstruction for Vision Transformers** ([https://arxiv.org/pdf/2504.02508](https://arxiv.org/pdf/2504.02508)).
   *Beihang University*
