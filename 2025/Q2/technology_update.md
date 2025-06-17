@@ -24,16 +24,6 @@ During decoding, page-level Quest excels by preserving the KV cache structure, a
 Their isoFLOPS analysis shows that for long contexts, larger sparse models outperform smaller dense ones at the same compute cost. They also establish scaling laws predicting accuracy from model size, sequence length, and compression ratio.
 The code is available at: [https://github.com/PiotrNawrot/sparse-frontier](https://github.com/PiotrNawrot/sparse-frontier).
 
-- **XAttention: Block Sparse Attention with Antidiagonal Scoring** ([https://arxiv.org/pdf/2503.16428](https://arxiv.org/pdf/2503.16428)).
-
-The authors introduce XAttention, a training-free block sparse attention method that accelerates the prefill stage of long-context Transformers using a novel antidiagonal scoring strategy. By summing attention values along antidiagonals, XAttention efficiently identifies important blocks while capturing key vertical and slash patterns.
-It achieves up to 13.5× prefill speedup at 256K tokens, maintaining accuracy comparable to full attention across benchmarks in language (RULER, LongBench), video understanding (VideoMME), and video generation (VBench). A dynamic thresholding algorithm further improves accuracy-efficiency trade-offs per attention head. For video generation, a short full-attention warmup ensures layout fidelity.
-The code is available at: [https://github.com/mit-han-lab/x-attention](https://github.com/mit-han-lab/x-attention).
-
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/388094c8-e87c-479a-9704-c5a7202d33e2">
-</p>
-
 - **OuroMamba: A Data-Free Quantization Framework for Vision Mamba Models** ([https://www.arxiv.org/pdf/2503.10959](https://www.arxiv.org/pdf/2503.10959)).
   *Intel and Georgia Tech*
   
@@ -138,6 +128,23 @@ TopV calculates how much each input token contributes to the output using the Si
 
 To prevent visual collapse—especially in detail-sensitive tasks like OCR and captioning—TopV includes a lightweight recovery step. From the discarded tokens, TopV uniformly samples a subset at regular intervals (e.g., every 4th or 6th token) and reinserts them into the token sequence alongside the top-k tokens, ensuring spatial diversity and semantic coverage without significant overhead. 
 TopV performs pruning once after the prompt and image are processed. The pruned visual token set remains fixed throughout decoding, enabling efficient and consistent inference.
+
+- **Beyond Text-Visual Attention: Exploiting Visual Cues for Effective Token Pruning in VLMs** ([https://arxiv.org/pdf/2412.01818](https://arxiv.org/pdf/2412.01818)).
+
+The authors introduce VisPruner, a training-free method for compressing visual token sequences in VLMs, dramatically reducing computational overhead. Unlike prior approaches that rely on text-visual attention scores—often biased and dispersed—VisPruner leverages visual cues directly from the visual encoder.
+
+They identify two key flaws in attention-based pruning:
+
+* Attention shift: Positional bias causes attention to favor lower image regions (tokens closer to the text in sequence).
+
+* Attention dispersion: Attention is spread too uniformly, making it hard to identify important tokens.
+
+VisPruner first selects a small set of important tokens using [CLS] attention (typically focused on foreground objects), then complements them with diverse tokens selected via similarity-based filtering to preserve background and contextual information. This visual-centric pruning strategy avoids reliance on language model internals and is compatible with fast attention mechanisms like FlashAttention.
+
+VisPruner outperforms finetuning-free baselines like FastV, SparseVLM, and VisionZip across 13 benchmarks—including high-resolution and video tasks—even when retaining as little as 5% of the original visual tokens. It achieves up to 95% FLOPs reduction and 75% latency reduction.
+
+<p align="center"><img  width="50%" height="50%" src="https://github.com/user-attachments/assets/c05a3d23-2db7-431d-bf3b-50dd34dbb644"></p>
+
 
 - **Beyond 2:4: exploring V:N:M sparsity for efficient transformer inference on GPUs**
 ([https://arxiv.org/abs/2410.16135](https://arxiv.org/abs/2410.16135)).
