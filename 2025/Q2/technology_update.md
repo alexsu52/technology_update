@@ -36,6 +36,23 @@ PTQ techniques, achieving state-of-the-art performance across diverse quantizati
 
 <p align="center"><img width="100%" height="50%" src="./figures/ouromamba_for_Q2_tech_update.png"></p><br/>
 
+- **TailorKV: A Hybrid Framework for Long-Context Inference via Tailored KV Cache Optimization** ([https://arxiv.org/pdf/2505.19586](https://arxiv.org/pdf/2505.19586)).
+
+TailorKV is a novel framework designed to optimize the KV cache in LLMs for long-context inference, significantly reducing GPU memory usage and latency without sacrificing model performance. 
+Instead of applying a one-size-fits-all compression strategy, TailorKV intelligently tailors compression based on the characteristics of each Transformer layer.
+
+The authors look at how each layer distributes its attention across tokens:
+
+* If a layer spreads attention broadly across many tokens, it’s considered to be dense. These layers are good candidates for quantization, because compressing them doesn’t significantly harm performance (usually shallow layers).
+
+* If a layer focuses attention on just a few tokens, it’s considered to be sparse. These layers are better suited for sparse retrieval, where only the most important tokens are kept in memory (deeper layers).
+
+To make this decision, they compute a score for each layer that reflects how concentrated or spread out the attention is. If the score is above a certain threshold, the layer is labeled quantization-friendly; otherwise, it’s considered sparsity-friendly. This classification is done offline, meaning it’s calculated once before inference, so it doesn’t affect runtime performance.
+TailorKV drastically reduces memory usage by quantizing 1 to 2 layers to 1-bit precision and loading only 1% to 3% of the tokens for the remaining layers.
+Maintains high accuracy across diverse tasks and datasets, outperforming state-of-the-art methods like SnapKV, Quest, and PQCache on LongBench. Code is available at: https://github.com/ydyhello/TailorKV.
+
+<p align="center"><img width="70%" height="50%" src="https://github.com/user-attachments/assets/568deaf3-3691-4fbe-b143-4699f343d03b"></p><br/>
+
 - **Log-Linear Attention** ([https://arxiv.org/pdf/2506.04761](https://arxiv.org/pdf/2506.04761)).
 
 The authors present Log-Linear Attention, a general framework that extends linear attention and state-space models by introducing a logarithmically growing memory structure for efficient long-context modeling. The paper identifies two key limitations in prior linear attention architectures: (1) the use of fixed-size hidden states restricts their ability to model multi-scale temporal dependencies, and (2) their performance degrades on long sequences due to the lack of hierarchical context aggregation.
