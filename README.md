@@ -10,10 +10,11 @@ Thanks to Alexander Kozlov, OpenVINO, NNCF and Intel Labs for the support.
 
 ## Contribution required:
 
-[Q2'25: Technology Update – Low Precision and Model Optimization](https://github.com/alexsu52/technology_update/blob/main/2025/Q2/technology_update.md)
+[Q3'25: Technology Update – Low Precision and Model Optimization](https://github.com/alexsu52/technology_update/blob/main/2025/Q3/technology_update.md)
 
 ## Published:
 
+- [Q2'25: Technology Update – Low Precision and Model Optimization](https://github.com/alexsu52/technology_update/blob/main/2025/Q2/technology_update.md)
 - [Q1'25: Technology Update – Low Precision and Model Optimization](https://blog.openvino.ai/blog-posts/q125-technology-update---low-precision-and-model-optimization)
 - [Q4'24: Technology Update – Low Precision and Model Optimization](https://blog.openvino.ai/blog-posts/q424-technology-update---low-precision-and-model-optimization)
 - [Q3'24: Technology Update – Low Precision and Model Optimization](https://blog.openvino.ai/blog-posts/q324-technology-update---low-precision-and-model-optimization)
