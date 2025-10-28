@@ -12,7 +12,11 @@ The paper "Radial Attention" introduces a sparse attention mechanism to optimize
 
 ## Papers with notable results 
 ### Quantization
-- ...
+- **70% Size, 100% Accuracy: Lossless LLM Compression for Efficient GPU Inference via Dynamic-Length Float** ([https://arxiv.org/pdf/2504.11651](https://arxiv.org/pdf/2504.11651))
+
+*Department of Computer Science, Rice University, Department of Computer and Data Sciences, Case Western Reserve University*
+
+The paper presents DFloat11, a dynamic‐length float encoding scheme that exploits the low entropy of BFloat16 weights in large language models to achieve ~30% storage savings (reducing from 100% → ~70% size) without any loss in accuracy (bit‐for‐bit identical outputs). They do this by frequency‐based variable‐length coding of weight values, and couple it with a custom GPU decompression kernel allowing efficient inference. Experiments on large LLMs show major throughput gains and extended context length under fixed GPU memory budgets, making deployment more practical on resource‐constrained hardware.
 
 ### Pruning / Sparsity
 - ...
