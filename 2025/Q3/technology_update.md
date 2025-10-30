@@ -26,7 +26,12 @@ The paper "Radial Attention" introduces a sparse attention mechanism to optimize
 <p align="center"><img width="100%" height="100%" src="./figures/Radial_Attention.png"></p><br/>
 
 - **Expected Attention: KV Cache Compression by Estimating Attention from Future Queries Distribution** ([https://arxiv.org/pdf/2510.00636](https://arxiv.org/pdf/2510.00636))
-TODO: Liubov Talamanova
+
+Expected Attention is a training-free KV cache compression method for LLMs that does not rely on observed attention scores, making it compatible with FlashAttention, where attention matrices are never materialized. It estimates the importance of cached key–value pairs by predicting how future queries will attend to them. Since hidden states before attention and MLP layers are empirically Gaussian-like, the method can analytically compute expected attention scores for each KV pair and rank them by importance for pruning.
+
+During decoding, Expected Attention maintains a small buffer of 128 hidden states to estimate future query statistics and performs compression every 512 generation steps. On LLaMA-3.1-8B, it achieves substantial memory savings—up to 15 GB reduction for 120k-token contexts. At a 50% compression ratio, Expected Attention maintains near-identical performance to the uncompressed baseline, effectively halving KV cache size while preserving output quality.
+
+Code: https://github.com/NVIDIA/kvpress
 
 ## Papers with notable results
 ### Quantization
