@@ -49,11 +49,12 @@ On LLaMA-2-7B and LLaMA-2-13B, XQuant achieves 7.7× memory savings with <0.1 pe
 - **Quantization Hurts Reasoning? An Empirical Study on Quantized Reasoning Models** ([https://papers-pdfs.assets.alphaxiv.org/2504.04823v2.pdf](https://papers-pdfs.assets.alphaxiv.org/2504.04823v2.pdf))
 TODO: Nikolai Lialiushkin
 
-- **KLLM: Fast LLM Inference with K-Means Quantization** ([https://papers-pdfs.assets.alphaxiv.org/2507.23035v3.pdf](https://papers-pdfs.assets.alphaxiv.org/2507.23035v3.pdf))
-TODO: Nikolai Lialiushkin
+- **Quamba2: A Robust and Scalable Post-training Quantization Framework for Selective State Space Models** ([https://papers-pdfs.assets.alphaxiv.org/2503.22879v3.pdf](https://papers-pdfs.assets.alphaxiv.org/2503.22879v3.pdf)).
+*The University of Texas at Austin, Cornell University, National Yang Ming Chiao Tung University*
 
-- **Quamba2: A Robust and Scalable Post-training Quantization Framework for Selective State Space Models** ([https://papers-pdfs.assets.alphaxiv.org/2503.22879v3.pdf](https://papers-pdfs.assets.alphaxiv.org/2503.22879v3.pdf))
-TODO: Nikolai Lialiushkin
+State Space Models (SSMs) are highly sensitive to quantization due to their linear recurrence process, which magnifies even minor numerical perturbations, making traditional Transformer quantization methods ineffective. The authors identify several distinctive properties of SSMs: (1) the input and output channel orders remain consistent, and (2) the activated channels and states are stable across time steps and input variations. Leveraging these insights, they propose Quamba2, a post-training quantization framework specifically tailored for SSMs. Quamba2 utilizes these properties through three key strategies: an offline sort-and-cluster process for input quantization, per-state-group quantization for input-dependent parameters, and cluster-aware weight reordering. The approach supports multiple precision configurations—W8A8, W4A8, and W4A16—across both Mamba1 and Mamba2 architectures.
+Empirical results show that Quamba2 surpasses existing SSM quantization methods on zero-shot and MMLU benchmarks. It achieves up to 1.3× faster pre-filling, 3× faster generation, and 4× lower memory usage on models such as Mamba2-8B, with only a 1.6% average accuracy drop. Code is available at https://github.com/enyac-group/Quamba.
+<p align="center"><img width="80%" height="80%" src="./figures/Quamba2.png"></p><br/>
 
 - **Qronos: Correcting the Past by Shaping the Future... in Post-Training Quantization** ([https://papers-pdfs.assets.alphaxiv.org/2505.11695v2.pdf](https://papers-pdfs.assets.alphaxiv.org/2505.11695v2.pdf))
 TODO: Nikolai Lialiushkin
