@@ -31,6 +31,7 @@ Expected Attention is a training-free KV cache compression method for LLMs that 
 
 - **SINQ: Sinkhorn-Normalized Quantization for Calibration-Free Low-Precision LLM Weights** (https://arxiv.org/pdf/2509.22944).
 *Huawei*
+
 The authors introduce a novel data-free post-training quantization method - SINQ. Instead of the traditional single-scale approach, SINQ employs dual scales: one for rows and another for columns. The method adapts the Sinkhorn-Knopp algorithm to normalize the standard deviations of matrix rows and columns. The algorithm is lightweight - operates at only 1.1x the runtime of basic RTN. The method proves robust across model scales, from small 0.6B parameter models to massive 235B parameter Mixture-of-Experts architectures. SINQ demonstrates orthogonality to other quantization advances. When combined with non-uniform quantization levels (NF4) or activation-aware calibration (A-SINQ with AWQ), it provides additional improvements.
 <p align="center"><img width="100%" height="100%" src="./figures/SINQ.png"></p><br/>
 
@@ -102,3 +103,4 @@ TODO: Nikolai Lialiushkin
 ### Software
 - OptiLLM (https://github.com/algorithmicsuperintelligence/optillm) is an OpenAI API-compatible optimizing inference proxy that implements 20+ state-of-the-art techniques to dramatically improve LLM accuracy and performance on reasoning tasks - without requiring any model training or fine-tuning. It is possible to beat the frontier models using these techniques across diverse tasks by doing additional compute at inference time.
 - FlashDMoE: Fast Distributed MoE in a Single Kernel - a fully GPU-resident MoE operator that fuses expert computation and inter-GPU communication into a single persistent GPU kernel. FlashDMoE enables fine-grained pipelining of dispatch, compute, and combine phases, eliminating launch overheads and reducing idle gaps. Blog post with links to paper and code: https://flash-moe.github.io
+- LMCache (https://github.com/LMCache/LMCache) is an LLM serving extension that cuts TTFT and boosts throughput in long-context scenarios. By storing the KV caches of reusable texts across various locations, including (GPU, CPU DRAM, Local Disk), LMCache reuses the KV caches of any reused text (not necessarily prefix) in any serving engine instance. Integrated with vLLM, LMCache delivers 3–10× faster responses and lower GPU usage in tasks like multi-round QA and RAG.
