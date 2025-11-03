@@ -59,7 +59,7 @@ Empirical results show that Quamba2 surpasses existing SSM quantization methods 
 - **Qronos: Correcting the Past by Shaping the Future... in Post-Training Quantization** ([https://papers-pdfs.assets.alphaxiv.org/2505.11695v2.pdf](https://papers-pdfs.assets.alphaxiv.org/2505.11695v2.pdf))
 *Department of Mathematics University of California, San Diego, AMD*
 
-
+The paper introduces Qronos, a new state-of-the-art post-training quantization (PTQ) algorithm for compressing LLMs. Its core innovation is that it unifies two critical error-handling strategies for the first time: it corrects for the "inherited" error propagated from previous layers and the "local" error from weights quantization within the current layer. This dual approach yields state-of-the-art results for small LLMs like Llama3-1B/3B/8B models. It can serve as a drop-in replacement for existing methods like GPTQ, offering run efficiently on resource-constrained hardware like AI laptops.
 <p align="center"><img width="100%" height="100%" src="./figures/Qronos.png"></p><br/>
 
 
@@ -86,5 +86,12 @@ This paper tackles the limitation of existing pruning methods for large language
 The authors introduce a lightweight framework to detect and terminate reasoning at the optimal Reasoning Completion Point (RCP), preventing unnecessary token generation in large reasoning models. They categorize the reasoning process of LLMs into three stages: insufficient exploration, compensatory reasoning, and reasoning convergence. Typically, LLMs produce correct answers during the compensatory reasoning stage, while the reasoning convergence stage often triggers overthinking, leading to excessive resource usage or even infinite loops. The RCP is defined as the boundary marking the end of the compensatory reasoning stage and typically appears at the end of the first complete reasoning cycle, beyond which additional reasoning offers no accuracy gain. To balance efficiency and accuracy, the authors distilled insights from CatBoost feature importance analysis into a concise and effective set of stepwise heuristic rules. Experiments on benchmarks such as AIME24, AIME25, and GPQA-D demonstrate that the proposed strategy reduces token consumption by over 30% while maintaining or improving reasoning accuracy.
 <p align="center"><img width="413" height="270" alt="image" src="https://github.com/user-attachments/assets/48f41367-b53d-47f6-ae61-867a15dcc02a" /></p><br/>
 
+- **Gumiho: A Hybrid Architecture to Prioritize Early Tokens in Speculative Decoding**
+*AMD*
+
+The authors delivers a new Speculative Decoding (SD) method for accelerating Large Language Model (LLM) inference. This is incremental improvment of Eagle SD method from NVidia. Its core insight is that early tokens in a speculative decoding draft are disproportionately more important than later ones. The paper introduces a novel hybrid architecture to exploit this: a high-accuracy serial Transformer for the crucial first tokens and efficient parallel MLPs for subsequent ones. Gumiho surpasses the existing SOTA method EAGLE-2 by 4.5%∼15.8%, but does not have comparison with EAGLE-3. The code: https://github.com/AMD-AGI/Gumiho
+<p align="center"><img width="100%" height="100%" src="./figures/Gumiho.png"></p><br/>
+
+- **
 ### Software
 - ...
