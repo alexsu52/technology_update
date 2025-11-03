@@ -57,7 +57,11 @@ Empirical results show that Quamba2 surpasses existing SSM quantization methods 
 <p align="center"><img width="80%" height="80%" src="./figures/Quamba2.png"></p><br/>
 
 - **Qronos: Correcting the Past by Shaping the Future... in Post-Training Quantization** ([https://papers-pdfs.assets.alphaxiv.org/2505.11695v2.pdf](https://papers-pdfs.assets.alphaxiv.org/2505.11695v2.pdf))
-TODO: Nikolai Lialiushkin
+*Department of Mathematics University of California, San Diego, AMD*
+
+
+<p align="center"><img width="100%" height="100%" src="./figures/Qronos.png"></p><br/>
+
 
 ### Pruning / Sparsity
 - **PagedEviction: Structured Block-wise KV Cache Pruning for Efficient Large Language Model Inference** ([https://arxiv.org/pdf/2509.04377](https://arxiv.org/pdf/2509.04377)).
