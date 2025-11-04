@@ -1,7 +1,7 @@
 Q3'25: Technology Update – Low Precision and Model Optimization
 ## Summary
 
-TBD
+During Q3 2025, substantial progress was made across several fronts in efficient LLM inference — particularly in low-precision weight quantization, KV-cache eviction and compression, attention reduction through sparse and hybrid architectures, and architecture-aware optimization for State Space Models and Mixture-of-Experts. Notably, compression methods began to see adoption for FP4 formats, extending beyond traditional integer quantization, and numerous studies demonstrated that advanced KV-cache optimizations can deliver order-of-magnitude memory savings and measurable speedups.
 
 ## Highlights
 
@@ -27,6 +27,7 @@ The paper "Radial Attention" introduces a sparse attention mechanism to optimize
 Expected Attention is a training-free KV cache compression method for LLMs that does not rely on observed attention scores, making it compatible with FlashAttention, where attention matrices are never materialized. It estimates the importance of cached key–value pairs by predicting how future queries will attend to them. Since hidden states before attention and MLP layers are empirically Gaussian-like, the method can analytically compute expected attention scores for each KV pair and rank them by importance for pruning. During decoding, Expected Attention maintains a small buffer of 128 hidden states to estimate future query statistics and performs compression every 512 generation steps. On LLaMA-3.1-8B, it achieves substantial memory savings—up to 15 GB reduction for 120k-token contexts. At a 50% compression ratio, Expected Attention maintains near-identical performance to the uncompressed baseline, effectively halving KV cache size while preserving output quality. Code: https://github.com/NVIDIA/kvpress
 
 ## Papers with notable results
+
 ### Quantization
 
 - **SINQ: Sinkhorn-Normalized Quantization for Calibration-Free Low-Precision LLM Weights** (https://arxiv.org/pdf/2509.22944).
@@ -38,7 +39,7 @@ The authors introduce a novel data-free post-training quantization method - SINQ
 - **70% Size, 100% Accuracy: Lossless LLM Compression for Efficient GPU Inference via Dynamic-Length Float** (https://arxiv.org/pdf/2504.11651).
 *Rice University, Case Western Reserve University*
 
-The paper presents DFloat11, a dynamic-length float encoding scheme that exploits the low entropy of BFloat16 weights in large language models to achieve ~30% storage savings (reducing from 100% to ~70% size) without any loss in accuracy (bit-for-bit identical outputs). They do this by frequency-based variable-length coding of weight values, and couple it with a custom GPU decompression kernel allowing efficient inference. Experiments on large LLMs show major throughput gains and extended context length under fixed GPU memory budgets, making deployment more practical on resource‐constrained hardware.
+The paper presents DFloat11, a dynamic-length float encoding scheme that exploits the low entropy of BFloat16 weights in large language models to achieve ~30% storage savings (reducing from 100% to ~70% size) without any loss in accuracy (bit-for-bit identical outputs). They do this by frequency-based variable-length coding of weight values, and couple it with a custom GPU decompression kernel allowing efficient inference. Experiments on large LLMs show major throughput gains and extended context length under fixed GPU memory budgets, making deployment more practical on resource-constrained hardware.
 
 - **XQUANT: Breaking the Memory Wall for LLM Inference with KV Cache Rematerialization** (https://arxiv.org/pdf/2508.10395).
 *UC Berkeley, FuriosaAI, ICSI, LBNL*
@@ -46,9 +47,6 @@ The paper presents DFloat11, a dynamic-length float encoding scheme that exploit
 This paper introduces XQuant, a memory-efficient LLM inference method that quantizes and caches input activations (X) of each transformer layer instead of Key-Value pairs. During inference, K and V are rematerialized on-the-fly by multiplying the cached X with the projection matrices, halving the memory footprint compared to standard KV caching. XQuant uses uniform low-bit quantization for X, which is more robust to aggressive quantization than K/V, enabling high compression with minimal accuracy loss.
 Building on this, XQuant-CL exploits cross-layer similarity in X embeddings by compressing the differences between successive layers, which have a smaller dynamic range due to the transformer's residual stream. Both XQuant and XQuant-CL outperform state-of-the-art KV cache quantization methods like KVQuant, while retaining accuracy close to the FP16 baseline. For GQA models, X is down-projected via offline SVD into a smaller latent space, preserving memory efficiency and accuracy.
 On LLaMA-2-7B and LLaMA-2-13B, XQuant achieves 7.7× memory savings with <0.1 perplexity degradation, while XQuant-CL reaches 12.5× savings at 2-bit precision (0.1 perplexity degradation) and 10× savings at 3-bit precision (0.01 perplexity degradation).
-
-- **Quantization Hurts Reasoning? An Empirical Study on Quantized Reasoning Models** (https://arxiv.org/pdf/2504.04823)
-TODO: Nikolai Lialiushkin
 
 - **Quamba2: A Robust and Scalable Post-training Quantization Framework for Selective State Space Models** (https://arxiv.org/pdf/2503.22879).
 *The University of Texas at Austin, Cornell University, National Yang Ming Chiao Tung University*
@@ -63,8 +61,8 @@ Empirical results show that Quamba2 surpasses existing SSM quantization methods 
 The paper introduces Qronos, a new state-of-the-art post-training quantization (PTQ) algorithm for compressing LLMs. Its core innovation is that it unifies two critical error-handling strategies for the first time: it corrects for the "inherited" error propagated from previous layers and the "local" error from weights quantization within the current layer. This dual approach yields state-of-the-art results for small LLMs like Llama3-1B/3B/8B models. It can serve as a drop-in replacement for existing methods like GPTQ, running efficiently on resource-constrained hardware like AI laptops.
 <p align="center"><img width="100%" height="100%" src="./figures/Qronos.png"></p><br/>
 
-
 ### Pruning / Sparsity
+
 - **PagedEviction: Structured Block-wise KV Cache Pruning for Efficient Large Language Model Inference** (https://arxiv.org/pdf/2509.04377).
 *Argonne National Laboratory, Illinois Institute of Technology*
 
@@ -84,11 +82,17 @@ This paper tackles the limitation of existing pruning methods for large language
 <p align="center"><img width="40%" height="40%" src="./figures/ELSA.png"></p><br/>
 
 ### Other
+
 - **Stop Spinning Wheels: Mitigating LLM Overthinking via Mining Patterns for Early Reasoning Exit** (https://arxiv.org/pdf/2508.17627).
 *Institute of Computing Technology, University of Chinese Academy of Sciences, Meituan - Beijing, China*
 
 The authors introduce a lightweight framework to detect and terminate reasoning at the optimal Reasoning Completion Point (RCP), preventing unnecessary token generation in large reasoning models. They categorize the reasoning process of LLMs into three stages: insufficient exploration, compensatory reasoning, and reasoning convergence. Typically, LLMs produce correct answers during the compensatory reasoning stage, while the reasoning convergence stage often triggers overthinking, leading to excessive resource usage or even infinite loops. The RCP is defined as the boundary marking the end of the compensatory reasoning stage and typically appears at the end of the first complete reasoning cycle, beyond which additional reasoning offers no accuracy gain. To balance efficiency and accuracy, the authors distilled insights from CatBoost feature importance analysis into a concise and effective set of stepwise heuristic rules. Experiments on benchmarks such as AIME24, AIME25, and GPQA-D demonstrate that the proposed strategy reduces token consumption by over 30% while maintaining or improving reasoning accuracy.
 <p align="center"><img width="413" height="270" alt="image" src="https://github.com/user-attachments/assets/48f41367-b53d-47f6-ae61-867a15dcc02a" /></p><br/>
+
+- **A Systematic Analysis of Hybrid Linear Attention** (https://arxiv.org/pdf/2507.06457).
+*UC Santa Cruz, ByteDance Seed, University of Groningen, CASIA, PolyU, M-A-P*
+
+This work systematically analyzes hybrid linear attention architectures to balance computational efficiency with long-range recall in large language models. The authors construct hybrid models by interleaving linear and full attention layers at varying ratios (24:1, 12:1, 6:1, 3:1) to analyze their impact on performance and efficiency. The key insight is that gating, hierarchical recurrence, and controlled forgetting mechanisms are critical to achieve Transformer-level recall in hybrid architectures when deployed at a 3:1 to 6:1 linear-to-full attention ratio, reducing KV cache memory by a factor of 4-7x.
 
 - **Gumiho: A Hybrid Architecture to Prioritize Early Tokens in Speculative Decoding** (https://arxiv.org/pdf/2503.10135).
 *AMD*
@@ -96,12 +100,12 @@ The authors introduce a lightweight framework to detect and terminate reasoning 
 The authors deliver a new Speculative Decoding (SD) method for accelerating Large Language Model (LLM) inference. This is an incremental improvement of the Eagle SD method from NVIDIA. Its core insight is that early tokens in a speculative decoding draft are disproportionately more important than later ones. The paper introduces a novel hybrid architecture to exploit this: a high-accuracy serial Transformer for the crucial first tokens and efficient parallel MLPs for subsequent ones. Gumiho surpasses the existing SOTA method EAGLE-2 by 4.5%∼15.8%, but does not have a comparison with EAGLE-3. The code: https://github.com/AMD-AGI/Gumiho
 <p align="center"><img width="60%" height="60%" src="./figures/Gumiho.png"></p><br/>
 
-- **A Systematic Analysis of Hybrid Linear Attention** (https://arxiv.org/pdf/2507.06457).
-*UC Santa Cruz, ByteDance Seed, University of Groningen, CASIA, PolyU, M-A-P*
-TODO: Nikolai Lialiushkin
-
 ### Software
+
 - OptiLLM (https://github.com/algorithmicsuperintelligence/optillm) is an OpenAI API-compatible optimizing inference proxy that implements 20+ state-of-the-art techniques to dramatically improve LLM accuracy and performance on reasoning tasks - without requiring any model training or fine-tuning. It is possible to beat the frontier models using these techniques across diverse tasks by doing additional compute at inference time.
+
 - FlashDMoE: Fast Distributed MoE in a Single Kernel - a fully GPU-resident MoE operator that fuses expert computation and inter-GPU communication into a single persistent GPU kernel. FlashDMoE enables fine-grained pipelining of dispatch, compute, and combine phases, eliminating launch overheads and reducing idle gaps. Blog post with links to paper and code: https://flash-moe.github.io
+
 - LMCache (https://github.com/LMCache/LMCache) is an LLM serving extension that cuts TTFT and boosts throughput in long-context scenarios. By storing the KV caches of reusable texts across various locations, including (GPU, CPU DRAM, Local Disk), LMCache reuses the KV caches of any reused text (not necessarily prefix) in any serving engine instance. Integrated with vLLM, LMCache delivers 3–10× faster responses and lower GPU usage in tasks like multi-round QA and RAG.
+
 - Flash Attention 4 (FA4) is a newly developed CUDA kernel optimized for Nvidia’s Blackwell architecture, delivering roughly a 20% performance improvement over previous versions. It achieves this speedup through an asynchronous pipeline of operations and several mathematical optimizations, including a fast exponential approximation and a more efficient online softmax. Tri Dao presented early results of FA4 at Hot Chips, and further implementation details were later shared in a blog post: https://modal.com/blog/reverse-engineer-flash-attention-4.
