@@ -61,6 +61,12 @@ Empirical results show that Quamba2 surpasses existing SSM quantization methods 
 The paper introduces Qronos, a new state-of-the-art post-training quantization (PTQ) algorithm for compressing LLMs. Its core innovation is that it unifies two critical error-handling strategies for the first time: it corrects for the "inherited" error propagated from previous layers and the "local" error from weights quantization within the current layer. This dual approach yields state-of-the-art results for small LLMs like Llama3-1B/3B/8B models. It can serve as a drop-in replacement for existing methods like GPTQ, running efficiently on resource-constrained hardware like AI laptops.
 <p align="center"><img width="100%" height="100%" src="./figures/Qronos.png"></p><br/>
 
+- **Quantization Hurts Reasoning? An Empirical Study on Quantized Reasoning Models**
+(https://arxiv.org/pdf/2504.04823)
+*Shenzhen International Graduate School, Tsinghua University, Huawei Noah’s Ark Lab*
+
+This paper conducts a systematic study on quantized reasoning models evaluating the open-sourced DeepSeek-R1-Distilled Qwen and LLaMA families ranging from 1.5B to 70B params, QwQ-32B, and Qwen3-8B. The authors conducted quantization for weights, KV and activation tensors. They claim that W8A8 or W4A16 may be treated as a form of lossless quantization. In specific, for weights with 8-bit nearly all the quatization types generally leads to lossless accuracy, with no clear leading algorithm. While at 4-bit FlatQuant emerge as a preferred algorithm and can yield near lossless performance for weight only quantization scenario. For KV the authors suggested 4-bit quatnization as a safer choice as < 4-bit the models suffer significant accuracy drop.  Additionally, the authors claim that quantization may make more critical tasks more prone to error with extreme low precision models often generating longer sequences, hinting at longer thinking scenario. The code is available at: https://github.com/ruikangliu/Quantized-Reasoning-Models.
+
 ### Pruning / Sparsity
 
 - **PagedEviction: Structured Block-wise KV Cache Pruning for Efficient Large Language Model Inference** (https://arxiv.org/pdf/2509.04377).
