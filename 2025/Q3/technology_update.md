@@ -1,7 +1,7 @@
 Q3'25: Technology Update – Low Precision and Model Optimization
 ## Summary
 
-During Q3 2025, substantial progress was made across several fronts in efficient LLM inference — particularly in low-precision weight quantization, KV-cache eviction and compression, attention reduction through sparse and hybrid architectures, and architecture-aware optimization for State Space Models and Mixture-of-Experts. Notably, compression methods began to see adoption for FP4 formats, extending beyond traditional integer quantization, and numerous studies demonstrated that advanced KV-cache optimizations can deliver order-of-magnitude memory savings and measurable speedups.
+During Q3 2025, substantial progress was made across several fronts in efficient LLM inference — particularly in low-precision weight quantization, KV-cache eviction and compression, attention reduction through sparse and hybrid architectures, and architecture-aware optimization for State Space Models and Mixture-of-Experts. Notably, compression methods began to see adoption for FP4 formats, extending beyond traditional integer quantization, and numerous studies show that advanced KV-cache optimizations push the state of the art, achieving order-of-magnitude memory savings and notable speedups.
 
 ## Highlights
 
