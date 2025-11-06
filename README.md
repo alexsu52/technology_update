@@ -24,4 +24,8 @@ Thanks to Alexander Kozlov, OpenVINO, NNCF and Intel Labs for the support.
 
 ## Contributors
 
-Alexander Kozlov, Nikolay Lyalyushkin, Nikita Savelyev, Souvik Kundu, Andrey Anufriev, Pablo Muñoz, Alexander Suslov, Liubov Talamanova, Daniil Lyakhov, Yury Gorbachev, Nilesh Jain, Maxim Proshin, Evangelos Georganas
+<a href="https://github.com/alexsu52/technology_update/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=alexsu52/technology_update" />
+</a>
+
+Made with [`contrib.rocks`](https://contrib.rocks).
