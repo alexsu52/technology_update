@@ -10,10 +10,11 @@ Thanks to Alexander Kozlov, OpenVINO, NNCF and Intel Labs for the support.
 
 ## Contribution required:
 
-[Q3'25: Technology Update – Low Precision and Model Optimization](https://github.com/alexsu52/technology_update/blob/main/2025/Q3/technology_update.md)
+[Q4'25: Technology Update – Low Precision and Model Optimization](https://github.com/alexsu52/technology_update/blob/main/2025/Q4/technology_update.md)
 
 ## Published:
 
+- [Q3'25: Technology Update – Low Precision and Model Optimization](https://blog.openvino.ai/blog-posts/q325-technology-update---low-precision-and-model-optimization)
 - [Q2'25: Technology Update – Low Precision and Model Optimization](https://blog.openvino.ai/blog-posts/q225-technology-update---low-precision-and-model-optimization)
 - [Q1'25: Technology Update – Low Precision and Model Optimization](https://blog.openvino.ai/blog-posts/q125-technology-update---low-precision-and-model-optimization)
 - [Q4'24: Technology Update – Low Precision and Model Optimization](https://blog.openvino.ai/blog-posts/q424-technology-update---low-precision-and-model-optimization)
@@ -23,4 +24,8 @@ Thanks to Alexander Kozlov, OpenVINO, NNCF and Intel Labs for the support.
 
 ## Contributors
 
-Alexander Kozlov, Nikolay Lyalyushkin, Nikita Savelyev, Souvik Kundu, Andrey Anufriev, Pablo Muñoz, Alexander Suslov, Liubov Talamanova, Daniil Lyakhov, Yury Gorbachev, Nilesh Jain, Maxim Proshin, Evangelos Georganas
+<a href="https://github.com/alexsu52/technology_update/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=alexsu52/technology_update" />
+</a>
+
+Made with [`contrib.rocks`](https://contrib.rocks).
