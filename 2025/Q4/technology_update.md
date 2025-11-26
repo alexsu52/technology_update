@@ -29,6 +29,11 @@ ThinKV is a KV cache compression framework for LRMs on tasks like coding and mat
 
 Experimental results show near-lossless accuracy and up to a 5.8× improvement in inference throughput, while utilizing less than 5% of the original KV cache memory. It operates at an average precision of 3.4–3.8 bits.
 
+- **Sparse VideoGen2: Accelerate Video Generation with Sparse Attention via Semantic-Aware Permutation** (https://arxiv.org/pdf/2505.18875)
+TODO: Liubov Talamanova
+
+- 
+
 ### Other
 - ...
 
