@@ -21,6 +21,14 @@ KVLinC is a framework designed to mitigate attention errors arising from KV cach
 *NVIDIA, MIT, UC San Diego, University of Toronto*
 TODO: Nikolai Lialiushkin
 
+- **THINKV: THOUGHT-ADAPTIVE KV CACHE COMPRESSION FOR EFFICIENT REASONING MODELS** (https://arxiv.org/pdf/2510.01290v1).
+ThinKV is a KV cache compression framework for LRMs on tasks like coding and mathematics. It classifies CoT tokens into Reasoning (R), Execution (E), and Transition (T) based on attention sparsity (T > R > E) using an offline calibration phase with Kernel Density Estimation to determine sparsity thresholds. The framework employs two main strategies:
+
+  * Think Before You Quantize: assigns token precision by importance. R/E tokens use 4-bit NVFP4, T tokens use 2-bit ternary, with group quantization (g=16) and shared FP8 (E4M3) scales; keys are quantized per-channel, values per-token. Outlier Transition thoughts are recognized as vital for backtracking and preventing model loops. Token importance is measured via KL divergence of the final answer distribution when a thought segment is removed.
+  * Think Before You Evict: a thought-adaptive eviction scheme aligned with PagedAttention. K-means clustering on post-RoPE key embeddings retains cluster centroids and corresponding values for evicted segments.
+
+Experimental results show near-lossless accuracy and up to a 5.8× improvement in inference throughput, while utilizing less than 5% of the original KV cache memory. It operates at an average precision of 3.4–3.8 bits.
+
 ### Other
 - ...
 
