@@ -29,8 +29,16 @@ ThinKV is a KV cache compression framework for LRMs on tasks like coding and mat
 
 Experimental results show near-lossless accuracy and up to a 5.8× improvement in inference throughput, while utilizing less than 5% of the original KV cache memory. It operates at an average precision of 3.4–3.8 bits.
 
-- **Sparse VideoGen2: Accelerate Video Generation with Sparse Attention via Semantic-Aware Permutation** (https://arxiv.org/pdf/2505.18875)
-TODO: Liubov Talamanova
+- **Sparse VideoGen2: Accelerate Video Generation with Sparse Attention via Semantic-Aware Permutation** (https://arxiv.org/pdf/2505.18875).
+
+SVG2 is a training-free sparse attention method designed to accelerate video generation in DiT-based models. Its core idea is to use semantic-aware permutation to better identify critical tokens and reduce unnecessary sparse-attention overhead.
+The method introduces three key techniques:
+  * Semantic-aware permutation: k-means clustering is applied to the Q/K/V vectors of each head and layer, and tokens are permuted by cluster to form semantically coherent blocks, improving the accuracy of critical-token detection.
+  * Dynamic top-p critical-token selection: Cluster centroids approximate attention scores, and clusters (and their tokens) are selected until the cumulative probability reaches p, enabling dynamic compute budgeting.
+  * Customized sparse-attention kernels: Since semantic-aware clusters vary naturally in size, custom kernels are used to support dynamic block sizes, which fixed-size sparse kernels cannot handle efficiently.
+    
+This approach achieves up to 2.30× and 1.89× speedups while maintaining PSNRs of 30 and 26 on HunyuanVideo and Wan 2.1, respectively.
+Code: https://github.com/svg-project/Sparse-VideoGen
 
 - 
 
