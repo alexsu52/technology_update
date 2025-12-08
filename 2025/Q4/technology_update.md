@@ -12,6 +12,14 @@ Q4'25: Technology Update – Low Precision and Model Optimization
 - **INT v.s. FP: A Comprehensive Study of Fine-Grained Low-bit Quantization Formats** (https://arxiv.org/abs/2510.25602)
 *The University of Hong Kong,ByteDance Seed,PicoHeart*
 TODO: Nikolai Lialiushkin
+- **Gated Attention for Large Language Models: Non-linearity, Sparsity, and Attention-Sink-Free** (https://arxiv.org/pdf/2505.06708)
+TODO: Nikolai Lialiushkin
+- **SignRoundV2: Closing the Performance Gap in Extremely Low-Bit Post-Training Quantization for LLMs** (https://arxiv.org/pdf/2512.04746)
+TODO: Nikolai Lialiushkin
+- **WUSH: Near-Optimal Adaptive Transforms for LLM Quantization** (https://arxiv.org/pdf/2512.00956)
+TODO: Nikolai Lialiushkin
+- **STaMP: Sequence Transformation and Mixed Precision for Low-Precision Activation Quantization** (https://arxiv.org/abs/2510.26771)
+TODO: Nikolai Lialiushkin
 
 - **KVLinC: KV CACHE QUANTIZATION WITH HADAMARD ROTATION AND LINEAR CORRECTION** (https://arxiv.org/pdf/2510.05373v1)
 KVLinC is a framework designed to mitigate attention errors arising from KV cache quantization. The authors integrate two complementary techniques to enable robust low-precision caching. First, through a detailed analysis of Hadamard rotation-based quantization strategies, they show that applying channel-wise quantization to raw keys and token-wise quantization to Hadamard-transformed values minimizes quantization error. Second, to address residual errors from quantized keys, they propose lightweight linear correction adapters that explicitly learn to compensate for distortions in attention. Extensive evaluation across the Llama, Qwen2.5, and Qwen3 model families demonstrates that KVLinC consistently matches or surpasses strong baselines under aggressive KV-cache compression. Finally, the authors develop a custom attention kernel that delivers up to 2.55× speedup over FlashAttention, enabling scalable, efficient, and long-context LLM inference.
