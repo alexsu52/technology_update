@@ -57,6 +57,7 @@ LeMiCa-slow achieves the highest reconstruction quality, reducing LPIPS from 0.1
 Code: https://unicomai.github.io/LeMiCa.
 
 ### Software
+- [vLLM-Gaudi](https://github.com/vllm-project/vllm-gaudi/releases/tag/v0.11.2) - first production-ready vLLM plugin for Gaudi, developed in close collaboration with the Intel team and fully aligned with upstream vLLM.
 - KernelFalcon: Autonomous GPU Kernel Generation via Deep Agents (https://pytorch.org/blog/kernelfalcon-autonomous-gpu-kernel-generation-via-deep-agents/) - a deep agent architecture for generating GPU kernels that combines hierarchical task decomposition and delegation, a deterministic control plane with early-win parallel search, grounded tool use, and persistent memory/observability. KernelFalcon is the first known open agentic system to achieve 100% correctness across all 250 L1/L2/L3 KernelBench tasks.
 - [CacheDiT](https://github.com/vipshop/cache-dit/tree/main): A PyTorch-native and Flexible Inference Engine with Hybrid Cache Acceleration and Parallelism for 🤗 DiTs. It provides a unified cache API that supports features like automatic block adapters, DBCache, and more, covering almost all Diffusers’ DiT-based pipelines.
 DBCache is a training-free Dual Block Caching mechanism inspired by the U-Net architecture. It splits the DiT Transformer block stack into three functional segments:
