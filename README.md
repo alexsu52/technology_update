@@ -1,5 +1,7 @@
 # Technology update – Low precision and model optimization 
 
+> **Note:** This repository has moved to [github.com/openvinotoolkit/technology_updates](https://github.com/openvinotoolkit/technology_updates)
+
 ## Disclaimer and call for collaboration 
 
 As AI research grows and becomes widespread, finding notable results amongst the constantly increasing flow of published papers is getting harder. As we progress with our development, we look into state-of-the-art approaches but cannot cover them all. We aim to share what we have learned and ask you to hint if you see something interesting – let us know!  
